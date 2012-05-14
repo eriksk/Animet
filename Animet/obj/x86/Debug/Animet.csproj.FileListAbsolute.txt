@@ -1,0 +1,6 @@
+F:\Documents\xnaprojects\Animet\Animet\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Documents\xnaprojects\Animet\Animet\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+F:\Documents\xnaprojects\Animet\Animet\bin\x86\Debug\Animet.dll
+F:\Documents\xnaprojects\Animet\Animet\bin\x86\Debug\Animet.pdb
+F:\Documents\xnaprojects\Animet\Animet\obj\x86\Debug\Animet.dll
+F:\Documents\xnaprojects\Animet\Animet\obj\x86\Debug\Animet.pdb

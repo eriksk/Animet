@@ -1,0 +1,10 @@
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\AnimetEditor.exe
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\AnimetEditor.pdb
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\AnimetEditor.exe
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\AnimetEditor.pdb
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Content\fonts\font.xnb
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Animet.dll
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Animet.pdb
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Content\gfx\tex.xnb
