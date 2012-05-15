@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using AnimetEditor.Forms;
 using Animet.Animations;
 using Animet.Frames;
+using Animet.IO;
 
 namespace AnimetEditor
 {
@@ -27,6 +28,7 @@ namespace AnimetEditor
         TextBox textBox;
         TextureContainer texContainer;
         FrameContainer frameContainer;
+        AnimationComponent animCompo;
 
         public Game1()
         {
@@ -49,6 +51,7 @@ namespace AnimetEditor
 
             animList = new ListComponent<Animation>(16, 50, "Animations").Load(Content, GraphicsDevice);
             animList.OnDoubleClickedEvent += new ListComponent<Animation>.OnClicked(animList_OnDoubleClickedEvent);
+            animList.OnClickedEvent += new ListComponent<Animation>.OnClicked(animList_OnClickedEvent);
 
             frameList = new ListComponent<Frame>(286, 50, "Frames").Load(Content, GraphicsDevice);
             frameList.OnClickedEvent += new ListComponent<Frame>.OnClicked(frameList_OnClickedEvent);
@@ -71,15 +74,48 @@ namespace AnimetEditor
             Button btnDeleteFrame = new Button(286 + 126, 16, "Delete Frame").Load(Content, GraphicsDevice);
             btnDeleteFrame.OnClickedEvent += new Button.OnClicked(btnDeleteFrame_OnClickedEvent);
             buttons.Add(btnDeleteFrame);
+            
+            Button btnKeyFrame = new Button(286 + 286, 16, "KeyFrame").Load(Content, GraphicsDevice);
+            btnKeyFrame.OnClickedEvent += new Button.OnClicked(btnKeyFrame_OnClickedEvent);
+            buttons.Add(btnKeyFrame);
+
+            Button btnSave = new Button(1280 - 100, 16, "Save").Load(Content, GraphicsDevice);
+            btnSave.OnClickedEvent += new Button.OnClicked(btnSave_OnClickedEvent);
+            buttons.Add(btnSave);
 
             texContainer = new TextureContainer(16, 400, @"gfx/tex").Load(Content, GraphicsDevice);
+            texContainer.OnNewSource += new TextureContainer.OnNewSourceDelegate(texContainer_OnNewSource);
 
-            frameContainer = new FrameContainer(600, 100).Load(Content, GraphicsDevice);
+            frameContainer = new FrameContainer(600, 200).Load(Content, GraphicsDevice);
 
             textBox = new TextBox().LoadContent(Content, GraphicsDevice);
 
+            animCompo = new AnimationComponent(900, 50).Load(Content, GraphicsDevice);
+
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData<Color>(new Color[] { Color.White });
+        }
+
+        void btnSave_OnClickedEvent()
+        {
+            AnimationIO.Save(animList.items, @"C:\Users\Erik\Desktop\" + "testmap.json");
+        }
+
+        void animList_OnClickedEvent(Animation item)
+        {
+            animCompo.SetAnimation(item);
+        }
+
+        void btnKeyFrame_OnClickedEvent()
+        {
+            Frame item = frameList.GetSelected();
+            Animation anim = animList.GetSelected();
+            anim.Keyframes.Add(new KeyFrame(item, 100f, new Animet.Scripts.KeyFrameScript[] { }));
+        }
+
+        void texContainer_OnNewSource(Rectangle source)
+        {
+            frameContainer.SetSource(source);
         }
 
         void frameList_OnClickedEvent(Frame item)
@@ -100,6 +136,7 @@ namespace AnimetEditor
         void btnDeleteFrame_OnClickedEvent()
         {
             frameList.DeleteSelected();
+            frameContainer.SetFrame(null);
         }
 
         void btnNewFrame_OnClickedEvent()
@@ -140,6 +177,7 @@ namespace AnimetEditor
                 animList.Update(dt);
                 frameList.Update(dt);
                 frameContainer.Update(dt);
+                animCompo.Update(dt);
                 foreach (var b in buttons)
                 {
                     b.Update();
@@ -162,6 +200,7 @@ namespace AnimetEditor
             }
             texContainer.Draw(spriteBatch);
             frameContainer.Draw(spriteBatch);
+            animCompo.Draw(spriteBatch);
             if (textBox.showing)
             {
                 spriteBatch.Draw(pixel, new Rectangle(0, 0, 1280, 720), Color.White * 0.5f);

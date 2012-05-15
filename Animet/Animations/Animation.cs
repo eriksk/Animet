@@ -11,13 +11,11 @@ namespace Animet.Animations
     public class Animation : INameable
     {
         protected List<KeyFrame> keyFrames;
-        protected List<Frame> frames;
         protected int currentFrame;
 
-        public Animation(List<KeyFrame> keyFrames, List<Frame> frames)
+        public Animation(List<KeyFrame> keyFrames)
         {
             this.keyFrames = keyFrames;
-            this.frames = frames;
             Reset();
         }
 
@@ -25,7 +23,12 @@ namespace Animet.Animations
         {
             get;
             set;
-        }        
+        }
+
+        public List<KeyFrame> Keyframes
+        {
+            get { return keyFrames; }
+        }
 
         public void Reset()
         {
@@ -42,7 +45,7 @@ namespace Animet.Animations
             {
                 keyFrames[currentFrame].Reset();
                 currentFrame++;
-                if (currentFrame > keyFrames.Count)
+                if (currentFrame >= keyFrames.Count)
                 {
                     currentFrame = 0;
                 }
@@ -52,8 +55,11 @@ namespace Animet.Animations
 
         public void Draw(SpriteBatch sb, Vector2 position)
         {
-            KeyFrame kf = keyFrames[currentFrame];
-            kf.Draw(sb, position);
+            if (currentFrame <= keyFrames.Count - 1)
+            {
+                KeyFrame kf = keyFrames[currentFrame];
+                kf.Draw(sb, position);
+            }
         }
     }
 }

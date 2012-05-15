@@ -17,12 +17,11 @@ namespace AnimetEditor.Forms
         public Color bgColor = Color.Black * 0.5f;
         public SpriteFont font;
         public float fontHeight;
-        public int selected;
         private Animation anim;
 
         public AnimationComponent(int x, int y)
         {
-            rect = new Rectangle(x, y, 512, 512);
+            rect = new Rectangle(x, y, 128, 128);
         }
 
         public AnimationComponent Load(ContentManager content, GraphicsDevice graphics)

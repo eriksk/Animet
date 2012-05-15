@@ -28,7 +28,7 @@ namespace Animet.Frames
 
         public bool Done
         {
-            get { return current / duration > 1.0f; }
+            get { return current / duration >= 1.0f; }
         }
 
         public void Update(float dt)

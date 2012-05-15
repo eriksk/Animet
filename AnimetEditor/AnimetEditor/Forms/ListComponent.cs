@@ -44,6 +44,11 @@ namespace AnimetEditor.Forms
 
             return this;
         }
+
+        public T GetSelected()
+        {
+            return items[selected]; 
+        }
         
         public void DeleteSelected()
         {

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Animations\AnimationCollection.cs" />
     <Compile Include="Animations\INameable.cs" />
     <Compile Include="Frames\Frame.cs" />
     <Compile Include="Frames\FramePart.cs" />
