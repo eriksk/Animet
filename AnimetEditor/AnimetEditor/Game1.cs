@@ -22,6 +22,8 @@ namespace AnimetEditor
 
         Texture2D pixel;
 
+        AnimationCollection collection;
+
         ListComponent<Animation> animList;
         ListComponent<Frame> frameList;
         List<Button> buttons;
@@ -49,11 +51,13 @@ namespace AnimetEditor
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            animList = new ListComponent<Animation>(16, 50, "Animations").Load(Content, GraphicsDevice);
+            collection = new AnimationCollection();
+
+            animList = new ListComponent<Animation>(16, 50, "Animations", collection.animations).Load(Content, GraphicsDevice);
             animList.OnDoubleClickedEvent += new ListComponent<Animation>.OnClicked(animList_OnDoubleClickedEvent);
             animList.OnClickedEvent += new ListComponent<Animation>.OnClicked(animList_OnClickedEvent);
 
-            frameList = new ListComponent<Frame>(286, 50, "Frames").Load(Content, GraphicsDevice);
+            frameList = new ListComponent<Frame>(286, 50, "Frames", collection.frames).Load(Content, GraphicsDevice);
             frameList.OnClickedEvent += new ListComponent<Frame>.OnClicked(frameList_OnClickedEvent);
             frameList.OnDoubleClickedEvent += new ListComponent<Frame>.OnClicked(frameList_OnDoubleClickedEvent);
 
@@ -98,7 +102,7 @@ namespace AnimetEditor
 
         void btnSave_OnClickedEvent()
         {
-            AnimationIO.Save(animList.items, @"C:\Users\Erik\Desktop\" + "testmap.json");
+            AnimationIO.Save(collection, @"C:\Users\Erik\Desktop\" + "testmap.json");
         }
 
         void animList_OnClickedEvent(Animation item)
@@ -153,7 +157,7 @@ namespace AnimetEditor
 
         void btnNewAnimClicked()
         {
-            animList.AddNew(new Animation(new List<Animet.Frames.KeyFrame>(), new List<Animet.Frames.Frame>()) { Name = "a" });
+            animList.AddNew(new Animation(new List<Animet.Frames.KeyFrame>()) { Name = "a" });
         }
 
         protected override void UnloadContent()

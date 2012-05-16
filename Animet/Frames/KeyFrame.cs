@@ -10,15 +10,29 @@ namespace Animet.Frames
 {
     public class KeyFrame
     {
-        protected Frame frameRef;
+        public Frame frameRef;
         protected KeyFrameScript[] scripts;
-        protected float current, duration;
+        public string[] editorScripts;
+        protected float current;
+        public float duration;
 
         public KeyFrame(Frame frameRef, float duration, KeyFrameScript[] scripts)
         {
             this.frameRef = frameRef;
             this.duration = duration;
             this.scripts = scripts;
+            editorScripts = new string[0];
+        }
+        public KeyFrame(Frame frameRef, float duration, string[] scripts)
+        {
+            this.frameRef = frameRef;
+            this.duration = duration;
+            this.editorScripts = scripts;
+            this.scripts = new KeyFrameScript[scripts.Length];
+            for (int i = 0; i < this.scripts.Length; i++)
+            {
+                this.scripts[i] = new KeyFrameScript(scripts[i]);
+            }
         }
 
         public void Reset()

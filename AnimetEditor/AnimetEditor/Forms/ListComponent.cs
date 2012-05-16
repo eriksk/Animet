@@ -26,18 +26,17 @@ namespace AnimetEditor.Forms
         public int selected;
         public string name;
 
-        public ListComponent(int x, int y, string name)
+        public ListComponent(int x, int y, string name, List<T> items)
         {
             rect = new Rectangle(x, y, 256, 512);
             this.name = name;
+            this.items = items;
         }
 
         public ListComponent<T> Load(ContentManager content, GraphicsDevice graphics)
         {
             pixel = new Texture2D(graphics, 1, 1);
             pixel.SetData<Color>(new Color[] { Color.White });
-
-            items = new List<T>();
 
             font = content.Load<SpriteFont>(@"fonts/font");
             fontHeight = font.MeasureString("HEIGHT").Y;

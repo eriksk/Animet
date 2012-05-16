@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Animet.Frames;
+using Microsoft.Xna.Framework.Content;
 
 namespace Animet.Animations
 {
@@ -19,6 +20,11 @@ namespace Animet.Animations
         {
             this.frames = frames;
             this.animations = animations;
+        }
+
+        public void Load(ContentManager content)
+        {
+            //TODO: set all textures
         }
     }
 }
