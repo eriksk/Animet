@@ -69,6 +69,7 @@ namespace Animet.IO
                 int frameCount = int.Parse(r.ReadLine());
                 for (int i = 0; i < frameCount; i++)
                 {
+                    string fName = r.ReadLine();
                     List<FramePart> fps = new List<FramePart>();
                     int fpCount = int.Parse(r.ReadLine());
                     for (int j = 0; j < fpCount; j++)
@@ -82,7 +83,7 @@ namespace Animet.IO
                         fps.Add(new FramePart(position, rotation, scale) { Source = source });
                     }
 
-                    Frame f = new Frame(null, fps);    
+                    Frame f = new Frame(null, fps) { Name = fName };    
                     frames.Add(f);
                 }
 
@@ -105,7 +106,7 @@ namespace Animet.IO
                         keyFrames.Add(kf);
                     }
 
-                    Animation a = new Animation(keyFrames);
+                    Animation a = new Animation(keyFrames) { Name = animName };
                     animations.Add(a);
                 }
                 

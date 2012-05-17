@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Animet.Frames;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Animet.Animations
 {
@@ -24,7 +25,25 @@ namespace Animet.Animations
 
         public void Load(ContentManager content)
         {
-            //TODO: set all textures
+            foreach (Frame f in frames)
+            {
+                f.texture = content.Load<Texture2D>(@"gfx/tex");
+            }
+        }
+
+        public Animation this[string name]
+        {
+            get
+            {
+                for (int i = 0; i < animations.Count; i++)
+                {
+                    if (animations[i].Name == name)
+                    {
+                        return animations[i];
+                    }
+                }
+                return null;
+            }
         }
     }
 }

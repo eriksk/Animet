@@ -128,6 +128,14 @@ namespace AnimetEditor.Forms
                                 frame.parts.Add(new FramePart(Vector2.Zero, 0f, 1f));
                                 selectedPart = frame.parts.Count - 1;
                             }
+                            if (key.IsKeyDown(Keys.D) && oldkey.IsKeyUp(Keys.D))
+                            {
+                                if (selectedPart != -1)
+                                {
+                                    frame.parts.Add(frame.parts[selectedPart].Clone());
+                                    selectedPart = frame.parts.Count - 1;
+                                }
+                            }
                         }
                     }
                     if (m.ScrollWheelValue != om.ScrollWheelValue)

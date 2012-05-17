@@ -32,17 +32,45 @@ namespace Animet.Frames
             }
         }
 
-        public void Draw(SpriteBatch sb, Texture2D texture, Vector2 position)
+        private Vector2 pos = Vector2.Zero;
+        public void Draw(SpriteBatch sb, Texture2D texture, Vector2 position, bool flipped = false)
         {
+            pos.Y = this.position.Y;
+            pos.X = flipped ? -this.position.X : this.position.X;
             sb.Draw(
                 texture,
-                this.position + position,
+                position + pos,
                 source,
                 Color.White,
-                rotation,
+                flipped ? -rotation : rotation,
                 origin,
                 scale,
-                SpriteEffects.None,
+                flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                1f);
+        }
+
+        public FramePart Clone()
+        {
+            return new FramePart(position, rotation, scale)
+            {
+                Source = Source,
+            };
+        }
+
+        public void DrawLerped(SpriteBatch sb, Texture2D texture, Vector2 position, FramePart nextPart, float process, bool flipped = false)
+        {
+            pos = Vector2.SmoothStep(this.position, nextPart.position, process);
+            pos.X = flipped ? -pos.X : pos.X;
+
+            sb.Draw(
+                texture,
+                position + pos,
+                source,
+                Color.White,
+                flipped ? -MathHelper.SmoothStep(rotation, nextPart.rotation, process) : MathHelper.SmoothStep(rotation, nextPart.rotation, process),
+                origin,
+                MathHelper.SmoothStep(scale, nextPart.scale, process),
+                flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
                 1f);
         }
     }

@@ -26,32 +26,35 @@ namespace AnimetEditor
 
         ListComponent<Animation> animList;
         ListComponent<Frame> frameList;
+        ListComponent<KeyFrame> kfList;
         List<Button> buttons;
         TextBox textBox;
         TextureContainer texContainer;
         FrameContainer frameContainer;
+        KeyFrameContainer kfContainer;
         AnimationComponent animCompo;
+
+        string path = @"C:\Users\Erik\Desktop\" + "testmap.json";
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
+            collection = new AnimationCollection();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            collection = new AnimationCollection();
 
             animList = new ListComponent<Animation>(16, 50, "Animations", collection.animations).Load(Content, GraphicsDevice);
             animList.OnDoubleClickedEvent += new ListComponent<Animation>.OnClicked(animList_OnDoubleClickedEvent);
@@ -60,6 +63,9 @@ namespace AnimetEditor
             frameList = new ListComponent<Frame>(286, 50, "Frames", collection.frames).Load(Content, GraphicsDevice);
             frameList.OnClickedEvent += new ListComponent<Frame>.OnClicked(frameList_OnClickedEvent);
             frameList.OnDoubleClickedEvent += new ListComponent<Frame>.OnClicked(frameList_OnDoubleClickedEvent);
+
+            kfList = new ListComponent<KeyFrame>(16, 200, "Keyframes", new List<KeyFrame>()).Load(Content, GraphicsDevice);
+            kfList.OnClickedEvent += new ListComponent<KeyFrame>.OnClicked(kfList_OnClickedEvent);
 
             buttons = new List<Button>();
 
@@ -83,14 +89,23 @@ namespace AnimetEditor
             btnKeyFrame.OnClickedEvent += new Button.OnClicked(btnKeyFrame_OnClickedEvent);
             buttons.Add(btnKeyFrame);
 
+            Button btnDeleteKeyFrame = new Button(286 + 386, 16, "Del KF").Load(Content, GraphicsDevice);
+            btnDeleteKeyFrame.OnClickedEvent += new Button.OnClicked(btnDeleteKeyFrame_OnClickedEvent);
+            buttons.Add(btnDeleteKeyFrame);
+
             Button btnSave = new Button(1280 - 100, 16, "Save").Load(Content, GraphicsDevice);
             btnSave.OnClickedEvent += new Button.OnClicked(btnSave_OnClickedEvent);
             buttons.Add(btnSave);
+
+            Button btnLoad = new Button(1280, 16, "Load").Load(Content, GraphicsDevice);
+            btnLoad.OnClickedEvent += new Button.OnClicked(btnLoad_OnClickedEvent);
+            buttons.Add(btnLoad);
 
             texContainer = new TextureContainer(16, 400, @"gfx/tex").Load(Content, GraphicsDevice);
             texContainer.OnNewSource += new TextureContainer.OnNewSourceDelegate(texContainer_OnNewSource);
 
             frameContainer = new FrameContainer(600, 200).Load(Content, GraphicsDevice);
+            kfContainer = new KeyFrameContainer(16, 400).Load(Content, GraphicsDevice);
 
             textBox = new TextBox().LoadContent(Content, GraphicsDevice);
 
@@ -100,14 +115,34 @@ namespace AnimetEditor
             pixel.SetData<Color>(new Color[] { Color.White });
         }
 
+        void btnDeleteKeyFrame_OnClickedEvent()
+        {
+            kfList.DeleteSelected();
+            kfContainer.SetKeyFrame(null);
+        }
+
+        void btnLoad_OnClickedEvent()
+        {
+            collection = AnimationIO.Load(path);
+            LoadContent();
+            collection.Load(Content);
+        }
+
+        void kfList_OnClickedEvent(KeyFrame item)
+        {
+            // select keyframe
+            kfContainer.SetKeyFrame(item);
+        }
+
         void btnSave_OnClickedEvent()
         {
-            AnimationIO.Save(collection, @"C:\Users\Erik\Desktop\" + "testmap.json");
+            AnimationIO.Save(collection, path);
         }
 
         void animList_OnClickedEvent(Animation item)
         {
             animCompo.SetAnimation(item);
+            AnimChanged(item);
         }
 
         void btnKeyFrame_OnClickedEvent()
@@ -146,6 +181,10 @@ namespace AnimetEditor
         void btnNewFrame_OnClickedEvent()
         {
             Frame f = new Frame(texContainer.texture, new List<FramePart>() { new FramePart(Vector2.Zero, 0f, 1f) }) { Name = "f" };
+            if (frameList.selected != -1)
+            {
+                f = frameList.items[frameList.selected].Clone();
+            }
             frameList.AddNew(f);
             frameContainer.SetFrame(f);
         }
@@ -153,11 +192,26 @@ namespace AnimetEditor
         void btnDeleteAnim_OnClickedEvent()
         {
             animList.DeleteSelected();
+            AnimChanged(null);
         }
 
         void btnNewAnimClicked()
         {
-            animList.AddNew(new Animation(new List<Animet.Frames.KeyFrame>()) { Name = "a" });
+            Animation ani = new Animation(new List<Animet.Frames.KeyFrame>()) { Name = "a" };
+            animList.AddNew(ani);
+            AnimChanged(ani);
+        }
+
+        void AnimChanged(Animation ani)
+        {
+            if (ani == null)
+            {
+                kfList.items = new List<KeyFrame>();
+            }
+            else
+            {
+                kfList.items = ani.Keyframes;
+            }
         }
 
         protected override void UnloadContent()
@@ -166,9 +220,6 @@ namespace AnimetEditor
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
-
             float dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (textBox.showing)
@@ -180,8 +231,10 @@ namespace AnimetEditor
                 texContainer.Update(dt);
                 animList.Update(dt);
                 frameList.Update(dt);
+                kfList.Update(dt);
                 frameContainer.Update(dt);
                 animCompo.Update(dt);
+                kfContainer.Update(dt);
                 foreach (var b in buttons)
                 {
                     b.Update();
@@ -198,6 +251,7 @@ namespace AnimetEditor
             spriteBatch.Begin();
             animList.Draw(spriteBatch);
             frameList.Draw(spriteBatch);
+            kfList.Draw(spriteBatch);
             foreach (var b in buttons)
             {
                 b.Draw(spriteBatch);
@@ -205,6 +259,7 @@ namespace AnimetEditor
             texContainer.Draw(spriteBatch);
             frameContainer.Draw(spriteBatch);
             animCompo.Draw(spriteBatch);
+            kfContainer.Draw(spriteBatch);
             if (textBox.showing)
             {
                 spriteBatch.Draw(pixel, new Rectangle(0, 0, 1280, 720), Color.White * 0.5f);

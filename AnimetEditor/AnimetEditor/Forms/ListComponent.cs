@@ -31,6 +31,7 @@ namespace AnimetEditor.Forms
             rect = new Rectangle(x, y, 256, 512);
             this.name = name;
             this.items = items;
+            selected = -1;
         }
 
         public ListComponent<T> Load(ContentManager content, GraphicsDevice graphics)

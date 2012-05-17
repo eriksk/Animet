@@ -5,10 +5,11 @@ using System.Text;
 using Animet.Scripts;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Animet.Animations;
 
 namespace Animet.Frames
 {
-    public class KeyFrame
+    public class KeyFrame : INameable
     {
         public Frame frameRef;
         protected KeyFrameScript[] scripts;
@@ -35,6 +36,17 @@ namespace Animet.Frames
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return frameRef.Name;
+            }
+            set
+            {
+            }
+        }
+
         public void Reset()
         {
             current = 0f;
@@ -57,9 +69,14 @@ namespace Animet.Frames
             }
         }
 
-        public void Draw(SpriteBatch sb, Vector2 position)
+        public void Draw(SpriteBatch sb, Vector2 position, bool flipped = false)
         {
-            frameRef.Draw(sb, position);
+            frameRef.Draw(sb, position, flipped);
+        }
+
+        public void DrawLerped(SpriteBatch sb, Vector2 position, KeyFrame nextFrame, bool flipped = false)
+        {
+            frameRef.DrawLerped(sb, position, nextFrame.frameRef, current / duration, flipped);
         }
     }
 }

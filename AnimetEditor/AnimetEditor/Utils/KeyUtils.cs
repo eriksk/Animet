@@ -15,7 +15,6 @@ namespace AnimetEditor.Utils
                 case Keys.Space: return " ";
 
                 // Escape Sequences 
-                case Keys.Enter: return "\n";                         // Create a new line 
                 case Keys.Tab: return "\t";                           // Tab to the right 
 
                 // D-Numerics (strip above the alphabet) 

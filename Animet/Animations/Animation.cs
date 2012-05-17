@@ -12,6 +12,7 @@ namespace Animet.Animations
     {
         protected List<KeyFrame> keyFrames;
         protected int currentFrame;
+        protected int runCount;
 
         public Animation(List<KeyFrame> keyFrames)
         {
@@ -23,6 +24,11 @@ namespace Animet.Animations
         {
             get;
             set;
+        }
+
+        public int RunCount
+        {
+            get { return runCount; }
         }
 
         public List<KeyFrame> Keyframes
@@ -37,6 +43,7 @@ namespace Animet.Animations
             {
                 keyFrames[i].Reset();
             }
+            runCount = 0;
         }
 
         public void Update(float dt)
@@ -48,17 +55,19 @@ namespace Animet.Animations
                 if (currentFrame >= keyFrames.Count)
                 {
                     currentFrame = 0;
+                    runCount++;
                 }
             }
             keyFrames[currentFrame].Update(dt);
         }
 
-        public void Draw(SpriteBatch sb, Vector2 position)
+        public void Draw(SpriteBatch sb, Vector2 position, bool flipped = false)
         {
             if (currentFrame <= keyFrames.Count - 1)
             {
                 KeyFrame kf = keyFrames[currentFrame];
-                kf.Draw(sb, position);
+                KeyFrame nextFrame = keyFrames[currentFrame + 1 > keyFrames.Count - 1 ? 0 : currentFrame + 1];
+                kf.DrawLerped(sb, position, nextFrame, flipped);
             }
         }
     }

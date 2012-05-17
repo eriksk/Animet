@@ -38,36 +38,41 @@ namespace AnimetEditor.Forms
         }
 
         MouseState om, m;
+        KeyboardState k;
         public void Update(float dt)
         {
             om = m;
             m = Mouse.GetState();
+            k = Keyboard.GetState();
 
-            if (rect.Contains(m.X, m.Y))
+            if (k.IsKeyDown(Keys.LeftShift))
             {
-                if (m.RightButton == ButtonState.Pressed)
+                if (rect.Contains(m.X, m.Y))
                 {
-                    rect.X += (int)((m.X - om.X));
-                    rect.Y += (int)((m.Y - om.Y));
-                }
-                if (m.LeftButton == ButtonState.Pressed || om.LeftButton == ButtonState.Pressed)
-                {
-                    if (m.LeftButton == ButtonState.Pressed && om.LeftButton == ButtonState.Released)
+                    if (m.RightButton == ButtonState.Pressed)
                     {
-                        // start
-                        source.X = m.X - rect.X;
-                        source.Y = m.Y - rect.Y;
+                        rect.X += (int)((m.X - om.X));
+                        rect.Y += (int)((m.Y - om.Y));
                     }
-                    else if (m.LeftButton == ButtonState.Pressed && om.LeftButton == ButtonState.Pressed)
+                    if (m.LeftButton == ButtonState.Pressed || om.LeftButton == ButtonState.Pressed)
                     {
-                        source.Width = (m.X - rect.X) - source.X;
-                        source.Height = (m.Y - rect.Y) - source.Y;
-                    }
-                    else if (m.LeftButton == ButtonState.Released && om.LeftButton == ButtonState.Pressed)
-                    {
-                        if (OnNewSource != null)
+                        if (m.LeftButton == ButtonState.Pressed && om.LeftButton == ButtonState.Released)
                         {
-                            OnNewSource(source);
+                            // start
+                            source.X = m.X - rect.X;
+                            source.Y = m.Y - rect.Y;
+                        }
+                        else if (m.LeftButton == ButtonState.Pressed && om.LeftButton == ButtonState.Pressed)
+                        {
+                            source.Width = (m.X - rect.X) - source.X;
+                            source.Height = (m.Y - rect.Y) - source.Y;
+                        }
+                        else if (m.LeftButton == ButtonState.Released && om.LeftButton == ButtonState.Pressed)
+                        {
+                            if (OnNewSource != null)
+                            {
+                                OnNewSource(source);
+                            }
                         }
                     }
                 }
@@ -76,14 +81,17 @@ namespace AnimetEditor.Forms
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(pixel, rect, Color.Black * 0.2f);
-            sb.DrawOutline(pixel, rect, Color.Black);
-            sb.Draw(texture, rect, Color.White * 0.8f);
-            if (rect.Contains(m.X, m.Y))
+            if (k.IsKeyDown(Keys.LeftShift))
             {
-                if (m.LeftButton == ButtonState.Pressed || om.LeftButton == ButtonState.Pressed)
+                sb.Draw(pixel, rect, Color.Black * 0.2f);
+                sb.DrawOutline(pixel, rect, Color.Black);
+                sb.Draw(texture, rect, Color.White * 0.8f);
+                if (rect.Contains(m.X, m.Y))
                 {
-                    sb.DrawOutline(pixel, new Rectangle(rect.X + source.X, rect.Y + source.Y, source.Width, source.Height), Color.Red);
+                    if (m.LeftButton == ButtonState.Pressed || om.LeftButton == ButtonState.Pressed)
+                    {
+                        sb.DrawOutline(pixel, new Rectangle(rect.X + source.X, rect.Y + source.Y, source.Width, source.Height), Color.Red);
+                    }
                 }
             }
         }
