@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Animet.Frames;
+using NibLib.Frames;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Animet.Animations
+namespace NibLib.Animations
 {
     public class Animation : INameable
     {
@@ -61,7 +61,7 @@ namespace Animet.Animations
             keyFrames[currentFrame].Update(dt);
         }
 
-        public void Draw(SpriteBatch sb, Vector2 position, bool flipped = false)
+        public void Draw(SpriteBatch sb, Vector2 position, bool flipped)
         {
             if (currentFrame <= keyFrames.Count - 1)
             {

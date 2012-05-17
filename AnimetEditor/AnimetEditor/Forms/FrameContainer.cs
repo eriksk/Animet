@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using Animet.Frames;
+using NibLib.Frames;
 using AnimtetEditor.Utils;
 
 namespace AnimetEditor.Forms
@@ -191,7 +191,7 @@ namespace AnimetEditor.Forms
                 sb.DrawOutline(pixel, new Rectangle(rect.Left, rect.Center.Y, rect.Width, 1), Color.Black * 0.5f);
                 sb.DrawOutline(pixel, new Rectangle(rect.Center.X, rect.Top, 1, rect.Height), Color.Black * 0.5f);
                 Vector2 pos = new Vector2(rect.Center.X, rect.Center.Y);
-                frame.Draw(sb, pos);
+                frame.Draw(sb, pos, false);
                 for (int i = 0; i < frame.parts.Count; i++)
                 {
                     if (selectedPart == i)

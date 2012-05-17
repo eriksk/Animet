@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Animet.Scripts;
+using NibLib.Scripts;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Animet.Animations;
+using NibLib.Animations;
 
-namespace Animet.Frames
+namespace NibLib.Frames
 {
     public class KeyFrame : INameable
     {
@@ -24,16 +24,12 @@ namespace Animet.Frames
             this.scripts = scripts;
             editorScripts = new string[0];
         }
-        public KeyFrame(Frame frameRef, float duration, string[] scripts)
+        public KeyFrame(Frame frameRef, float duration, string[] editorscripts, KeyFrameScript[] scripts)
         {
             this.frameRef = frameRef;
             this.duration = duration;
-            this.editorScripts = scripts;
-            this.scripts = new KeyFrameScript[scripts.Length];
-            for (int i = 0; i < this.scripts.Length; i++)
-            {
-                this.scripts[i] = new KeyFrameScript(scripts[i]);
-            }
+            this.editorScripts = editorscripts;
+            this.scripts = scripts;
         }
 
         public string Name
@@ -64,17 +60,17 @@ namespace Animet.Frames
             {
                 for (int i = 0; i < scripts.Length; i++)
                 {
-                    //scripts[i].Execute();
+                    scripts[i].Execute();
                 }
             }
         }
 
-        public void Draw(SpriteBatch sb, Vector2 position, bool flipped = false)
+        public void Draw(SpriteBatch sb, Vector2 position, bool flipped)
         {
             frameRef.Draw(sb, position, flipped);
         }
 
-        public void DrawLerped(SpriteBatch sb, Vector2 position, KeyFrame nextFrame, bool flipped = false)
+        public void DrawLerped(SpriteBatch sb, Vector2 position, KeyFrame nextFrame, bool flipped)
         {
             frameRef.DrawLerped(sb, position, nextFrame.frameRef, current / duration, flipped);
         }

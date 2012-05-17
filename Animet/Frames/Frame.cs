@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Animet.Animations;
+using NibLib.Animations;
 
-namespace Animet.Frames
+namespace NibLib.Frames
 {
     public class Frame : INameable
     {
@@ -25,7 +25,7 @@ namespace Animet.Frames
             set;
         }
 
-        public void Draw(SpriteBatch sb, Vector2 position, bool flipped = false)
+        public void Draw(SpriteBatch sb, Vector2 position, bool flipped)
         {
             for (int i = 0; i < parts.Count; i++)
             {
@@ -33,7 +33,7 @@ namespace Animet.Frames
             }
         }
 
-        public void DrawLerped(SpriteBatch sb, Vector2 position, Frame nextFrame, float process, bool flipped = false)
+        public void DrawLerped(SpriteBatch sb, Vector2 position, Frame nextFrame, float process, bool flipped)
         {
             for (int i = 0; i < parts.Count; i++)
             {

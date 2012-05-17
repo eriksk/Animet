@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using Animet.Animations;
+using NibLib.Animations;
 using AnimetEditor.Utils;
 
 namespace AnimetEditor.Forms
@@ -77,7 +77,7 @@ namespace AnimetEditor.Forms
 
             if (KeyClicked(Keys.Back))
             {
-                if (text.Length > 0)
+                if (text != null && text.Length > 0)
                 {
                     text = text.Substring(0, text.Length - 1);
                 }

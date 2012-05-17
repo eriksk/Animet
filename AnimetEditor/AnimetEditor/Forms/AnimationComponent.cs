@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using Animet.Animations;
+using NibLib.Animations;
 
 namespace AnimetEditor.Forms
 {
@@ -74,7 +74,7 @@ namespace AnimetEditor.Forms
             sb.DrawOutline(pixel, rect, Color.Black);
             if (anim != null)
             {
-                anim.Draw(sb, new Vector2(rect.Center.X, rect.Center.Y));
+                anim.Draw(sb, new Vector2(rect.Center.X, rect.Center.Y), false);
             }
         }
     }

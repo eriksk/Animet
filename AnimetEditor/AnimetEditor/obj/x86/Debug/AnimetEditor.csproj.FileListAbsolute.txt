@@ -5,6 +5,9 @@ F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\Microsof
 F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\AnimetEditor.exe
 F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\AnimetEditor.pdb
 F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Content\fonts\font.xnb
-F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Animet.dll
-F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Animet.pdb
 F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\Content\gfx\tex.xnb
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\AnimetEditor.Forms.InputBox.resources
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\NibLib.dll
+F:\Documents\xnaprojects\Animet\AnimetEditor\AnimetEditor\bin\x86\Debug\NibLib.pdb

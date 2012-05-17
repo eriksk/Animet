@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using AnimetEditor.Forms;
-using Animet.Animations;
-using Animet.Frames;
-using Animet.IO;
+using NibLib.Animations;
+using NibLib.Frames;
+using NibLib.IO;
 
 namespace AnimetEditor
 {
@@ -123,7 +123,7 @@ namespace AnimetEditor
 
         void btnLoad_OnClickedEvent()
         {
-            collection = AnimationIO.Load(path);
+            collection = AnimationIO.Load(path, null);
             LoadContent();
             collection.Load(Content);
         }
@@ -149,7 +149,7 @@ namespace AnimetEditor
         {
             Frame item = frameList.GetSelected();
             Animation anim = animList.GetSelected();
-            anim.Keyframes.Add(new KeyFrame(item, 100f, new Animet.Scripts.KeyFrameScript[] { }));
+            anim.Keyframes.Add(new KeyFrame(item, 100f, new NibLib.Scripts.KeyFrameScript[] { }));
         }
 
         void texContainer_OnNewSource(Rectangle source)
@@ -197,7 +197,7 @@ namespace AnimetEditor
 
         void btnNewAnimClicked()
         {
-            Animation ani = new Animation(new List<Animet.Frames.KeyFrame>()) { Name = "a" };
+            Animation ani = new Animation(new List<NibLib.Frames.KeyFrame>()) { Name = "a" };
             animList.AddNew(ani);
             AnimChanged(ani);
         }

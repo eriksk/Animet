@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animet", "Animet\Animet.csproj", "{B26BC325-D3ED-4F65-B44E-599A6FB14A65}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimetGame", "AnimetGame\AnimetGame\AnimetGame.csproj", "{AAD8B581-FEFD-4DE8-BE02-FBB62C48F5BE}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "AnimetGameContent", "AnimetGame\AnimetGameContent\AnimetGameContent.contentproj", "{27DC121B-F87C-4BBE-BEBC-6D35F321501C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimetGameContent", "AnimetGame\AnimetGameContent\AnimetGameContent.contentproj", "{27DC121B-F87C-4BBE-BEBC-6D35F321501C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimetEditor", "AnimetEditor\AnimetEditor\AnimetEditor.csproj", "{0686CC53-1258-4003-80ED-DFED614ACDB3}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "AnimetEditorContent", "AnimetEditor\AnimetEditorContent\AnimetEditorContent.contentproj", "{84D916D4-BFDC-4A52-8203-287726A96782}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimetEditorContent", "AnimetEditor\AnimetEditorContent\AnimetEditorContent.contentproj", "{84D916D4-BFDC-4A52-8203-287726A96782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NibLib", "..\Nibble\NibLib\NibLib.csproj", "{98753404-FB13-474C-BA6B-59B8E6EAD63D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B26BC325-D3ED-4F65-B44E-599A6FB14A65}.Debug|x86.ActiveCfg = Debug|x86
-		{B26BC325-D3ED-4F65-B44E-599A6FB14A65}.Debug|x86.Build.0 = Debug|x86
-		{B26BC325-D3ED-4F65-B44E-599A6FB14A65}.Release|x86.ActiveCfg = Release|x86
-		{B26BC325-D3ED-4F65-B44E-599A6FB14A65}.Release|x86.Build.0 = Release|x86
 		{AAD8B581-FEFD-4DE8-BE02-FBB62C48F5BE}.Debug|x86.ActiveCfg = Debug|x86
 		{AAD8B581-FEFD-4DE8-BE02-FBB62C48F5BE}.Debug|x86.Build.0 = Debug|x86
 		{AAD8B581-FEFD-4DE8-BE02-FBB62C48F5BE}.Release|x86.ActiveCfg = Release|x86
@@ -33,6 +29,10 @@ Global
 		{0686CC53-1258-4003-80ED-DFED614ACDB3}.Release|x86.Build.0 = Release|x86
 		{84D916D4-BFDC-4A52-8203-287726A96782}.Debug|x86.ActiveCfg = Debug|x86
 		{84D916D4-BFDC-4A52-8203-287726A96782}.Release|x86.ActiveCfg = Release|x86
+		{98753404-FB13-474C-BA6B-59B8E6EAD63D}.Debug|x86.ActiveCfg = Debug|x86
+		{98753404-FB13-474C-BA6B-59B8E6EAD63D}.Debug|x86.Build.0 = Debug|x86
+		{98753404-FB13-474C-BA6B-59B8E6EAD63D}.Release|x86.ActiveCfg = Release|x86
+		{98753404-FB13-474C-BA6B-59B8E6EAD63D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

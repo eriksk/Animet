@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Animet.Animations;
+using NibLib.Animations;
 using System.IO;
-using Animet.Frames;
+using NibLib.Frames;
 using System.Globalization;
 using Microsoft.Xna.Framework;
-using Animet.Scripts;
+using NibLib.Scripts;
 
-namespace Animet.IO
+namespace NibLib.IO
 {
     public class AnimationIO
     {
@@ -102,6 +102,7 @@ namespace Animet.IO
                         {
                             scripts[x] = r.ReadLine();
                         }
+                        List<KeyFrameScript> s = new List<KeyFrameScript>();
                         KeyFrame kf = new KeyFrame(frames[fIndex], duration, scripts);
                         keyFrames.Add(kf);
                     }

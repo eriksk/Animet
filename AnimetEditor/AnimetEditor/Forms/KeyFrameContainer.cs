@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using Animet.Frames;
+using NibLib.Frames;
 using Microsoft.Xna.Framework.Input;
 
 namespace AnimetEditor.Forms
@@ -27,7 +27,7 @@ namespace AnimetEditor.Forms
 
         public KeyFrameContainer(int x, int y)
         {
-            rect = new Rectangle(x, y, 128, 128);
+            rect = new Rectangle(x, y, 128, 256);
         }
 
         public KeyFrameContainer Load(ContentManager content, GraphicsDevice graphics)
@@ -76,6 +76,19 @@ namespace AnimetEditor.Forms
                             slider.X = (int)MathHelper.Clamp(slider.X, 0, rect.X + rect.Width);
                             frame.duration = (int)MathHelper.Lerp(0, 1000, ((float)slider.X) / ((float)rect.X + (float)rect.Width));
                         }
+
+                        if (om.LeftButton == ButtonState.Released)
+                        {
+                            if (new Rectangle(rect.X + 8, rect.Center.Y + 24, rect.Width, rect.Height / 2).Contains(m.X, m.Y))
+                            {
+                                InputBox ib = new InputBox(frame.editorScripts);
+                                ib.ShowDialog();
+                                if (ib.Result != null)
+                                {
+                                    frame.editorScripts = ib.Result;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -89,8 +102,13 @@ namespace AnimetEditor.Forms
             {
                 sb.DrawString(font, frame.frameRef.Name, new Vector2(rect.X + 8, rect.Y + fontHeight), Color.White);     
                 sb.DrawString(font, frame.duration.ToString(), new Vector2(rect.X + 8, rect.Y + fontHeight * 2f), Color.White);
-                sb.DrawOutline(pixel, new Rectangle(rect.X + slider.X, rect.Y + slider.Y, slider.Width, slider.Height), Color.Black);
-                sb.DrawOutline(pixel, new Rectangle(rect.X, rect.Y + slider.Y, rect.Width, 1), Color.Black * 0.5f);
+                sb.Draw(pixel, new Rectangle(rect.X + slider.X, rect.Y + slider.Y, slider.Width, slider.Height), Color.Black);
+                sb.Draw(pixel, new Rectangle(rect.X, rect.Y + slider.Y + slider.Width / 2, rect.Width, 1), Color.Black * 0.5f);
+                sb.Draw(pixel, new Rectangle(rect.X + 8, rect.Center.Y + 24, rect.Width - 16, (rect.Height / 2) - 32), Color.Red * 0.2f);
+                for (int i = 0; i < frame.editorScripts.Length; i++)
+                {
+                    sb.DrawString(font, frame.editorScripts[i], new Vector2(rect.X + 8, rect.Center.Y + 24 + (i * fontHeight)), Color.White);                    
+                }
             }
         }
     }

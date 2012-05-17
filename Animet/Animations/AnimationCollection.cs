@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Animet.Frames;
+using NibLib.Frames;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Animet.Animations
+namespace NibLib.Animations
 {
     public class AnimationCollection
     {

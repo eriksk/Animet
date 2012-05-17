@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Animet.Frames
+namespace NibLib.Frames
 {
     public class FramePart
     {
@@ -33,7 +33,7 @@ namespace Animet.Frames
         }
 
         private Vector2 pos = Vector2.Zero;
-        public void Draw(SpriteBatch sb, Texture2D texture, Vector2 position, bool flipped = false)
+        public void Draw(SpriteBatch sb, Texture2D texture, Vector2 position, bool flipped)
         {
             pos.Y = this.position.Y;
             pos.X = flipped ? -this.position.X : this.position.X;
@@ -57,7 +57,7 @@ namespace Animet.Frames
             };
         }
 
-        public void DrawLerped(SpriteBatch sb, Texture2D texture, Vector2 position, FramePart nextPart, float process, bool flipped = false)
+        public void DrawLerped(SpriteBatch sb, Texture2D texture, Vector2 position, FramePart nextPart, float process, bool flipped)
         {
             pos = Vector2.SmoothStep(this.position, nextPart.position, process);
             pos.X = flipped ? -pos.X : pos.X;
